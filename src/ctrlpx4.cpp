@@ -50,3 +50,7 @@ CtrlPx4::CtrlPx4()
 CtrlPx4::~CtrlPx4()
 {
 }
+bool CtrlPx4::connectState()
+{
+    return currentState.connected;
+}

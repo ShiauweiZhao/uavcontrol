@@ -14,6 +14,7 @@ public:
   ~CtrlPx4();
   void setPublishPose();
   bool checkMocapDataValid();
+  bool connectState();
 
 private:
   mavros_msgs::State currentState;
