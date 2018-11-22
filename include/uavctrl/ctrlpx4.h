@@ -15,12 +15,19 @@ public:
   void setPublishPose();
   bool checkMocapDataValid();
   bool connectState();
+  bool armingState();
+  std::string stateMode();
+  std::string setStateMode();
+  void publishSetPoint();
+  void offbModeArmed();
 
 private:
   mavros_msgs::State currentState;
   geometry_msgs::PoseStamped mocapPose;
   std_msgs::UInt8 uavCommand;
-  geometry_msgs::PoseStamped localPosPublish;
+  geometry_msgs::PoseStamped localPosPubMsg;
+  mavros_msgs::CommandBool armCmd;
+  mavros_msgs::SetMode offbSetMode;
 
 private:
   void stateCallback(const mavros_msgs::State);
@@ -33,9 +40,9 @@ private:
   ros::Subscriber stateSubscriber;
   ros::Subscriber uavCommandSubscriber;
   ros::Subscriber mocapPoseSubscriber;
-
   ros::Publisher localPositionPublish;
 
+public:
   ros::ServiceClient armingClient;
   ros::ServiceClient setModeClient;
 };

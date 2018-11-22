@@ -12,7 +12,9 @@ int main(int argc, char **argv)
     {
         ros::spinOnce();
         rate.sleep();
+        ROS_INFO("wait fcu connect");
     }
+    // check mocap connect
     while (ros::ok())
     {
         if (ctrlpx4.checkMocapDataValid())
@@ -21,8 +23,14 @@ int main(int argc, char **argv)
             break;
         }
         ros::spinOnce();
+        ROS_INFO("wait mocap data ");
     }
     while (ros::ok())
     {
+        ctrlpx4.offbModeArmed();
+        ctrlpx4.publishSetPoint();
+        ros::spinOnce();
+        rate.sleep();
+        ROS_INFO("pub msg");
     }
 }
